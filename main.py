@@ -66,18 +66,18 @@ while 1:
         elif fab == "фабрика опыта 1 lvl":
             lvl_point[xod] += 1
 
-        elif fab == "фабрика оружия 1 lvl - 4":
-            if many[xod] >= 4:
+        elif fab == "фабрика оружия 1 lvl - 6":
+            if many[xod] >= 6:
                 atac[xod] += 1
-                many[xod] -= 4
-        elif fab == "фабрика оружия 2 lvl - 8":
-            if many[xod] >= 8:
+                many[xod] -= 6
+        elif fab == "фабрика оружия 2 lvl - 10":
+            if many[xod] >= 10:
                 atac[xod] += 2
-                many[xod] -= 8
-        elif fab == "фабрика оружия 3 lvl - 12":
-            if many[xod] >=12:
+                many[xod] -= 10
+        elif fab == "фабрика оружия 3 lvl - 15":
+            if many[xod] >=15:
                 atac[xod] += 3
-                many[xod] -= 12
+                many[xod] -= 15
 
 
 
@@ -322,11 +322,13 @@ while 1:
                 inp2 = input()
                 if inp2 == "1":
                     my_vrag[xod][1] -= atac[xod]
-
+                
                     if my_vrag[xod][1] <= 0 :
                         print("ПОБЕДА")
-
                         rnd = random.randint(2 , 8)
+                        
+                       
+                    
                         print("вам выпало : ")
                         print()
                         for i in range(rnd):
@@ -334,8 +336,8 @@ while 1:
                             predmet = my_vrag[xod][3][random.randint(0 , len(my_vrag[xod][3]))]
                             print(predmet)
                             symka[xod].append(predmet)
-
                         my_vrag[xod][0] = "n"
+                        vrag[xod][1] = 50
                         input()
         except Exception:
             print("err")
