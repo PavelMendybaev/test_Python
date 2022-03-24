@@ -5,7 +5,7 @@ import random
 colors = {"red": "\033[31m", "black": '\033[30m', "blue": '\033[34m'}
 afects_text = {"kyrsiv": "\033[1m", "normal": "\033[0m"}
 
-name = ["павел", "глеб"]
+name = ["павел", "еловек((друг(пидр)))"]
 color_name = ["blue", "red"]
 afects_name = ["kyrsiv", "normal"]
 
@@ -24,7 +24,7 @@ armor = [5, 5]
 armor_regen = [1 , 1]
 atac = [1 , 1]
 symka = [[],[]]
-max_fabric = [3  ,3]
+max_fabric = [1  ,1]
 rnd_kypec = [30 , 30]
 my_vrag = [["n"],["n"]]
 
@@ -251,7 +251,7 @@ while 1:
         print()
         print()
         print("     1.купить фабрику ")
-        print("     2.купить места для фабрик , сейчас : " + str(max_fabric[xod]) )
+        print("     2.купить места для фабрик ,свободныйх мест сейчас : " + str(max_fabric[xod] - len(fabric_active[xod])) )
 
         vibor = input()
 
@@ -422,4 +422,7 @@ while 1:
 
 
     xod = not(xod)
+    
+input()
+input()
 input()
