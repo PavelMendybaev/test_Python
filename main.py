@@ -19,31 +19,45 @@ hp = [ rnd_hp, rnd_hp]
 rnd_many = random.randint(4 , 50)
 many = [rnd_many, rnd_many]
 
-max_armor = [5 ,5]
+max_armor = [8 ,8]
 armor = [5, 5]
 armor_regen = [1 , 1]
 atac = [1 , 1]
 symka = [[],[]]
 max_fabric = [1  ,1]
 rnd_kypec = [30 , 30]
-my_vrag = [["n"],["n"]]
+
+my_vrag = ["n","n"]
 
 
 kopat =  [1 , 1]
 predmets = [ ["зелье здоровья +10xp[плохое]" ,"зелье улучшения лопаты +1[плохое]" , "зелье опыта +3[плохое]", "граната[плохое] -10"] ,
              ["зелье здоровья +30xp[обычное]" , "зелье опыта +6[обычное]" , "зелье улучшения лопаты +3[обычное]" , "граната[обычное] -40"] ,
              ["зелье здоровья[хорошее] +70xp" , "зелье улучшения лопаты +5[хорошее]" , "граната[хорошее] -80"],
-             ["2 места для фабрики[отличное]"]]
+             ["2 места для фабрики[отличное]"],
+             ["HYSOS[мифическое]"]]
+
+
+
+
 
 
 fabrics = [["фабрика золота 1 lvl"  ],
-           ["фабрика золота 2 lvl" , "фабрика оружия 1 lvl - 4", ],
-           ["фабрика золота 3 lvl" , "фабрика оружия 2 lvl - 8" , "фабрика опыта 1 lvl"]]
+           ["фабрика золота 2 lvl" , "фабрика оружия 1 lvl - 6", ],
+           ["фабрика золота 3 lvl" , "фабрика оружия 2 lvl - 10" ],
+           ["фабрика золота 4 lvl" ,  "фабрика опыта 1 lvl" ]]
 
-vrag = [["слизень" , 50 , 5 , ["зелье здоровья +10xp[плохое]" ,"граната[плохое] -10" , "зелье опыта +3[плохое]" ,"зелье улучшения лопаты +1[плохое]"]],
-         ["волк" , 150 , 20 , ["зелье здоровья +30xp[обычное]" ,"зелье опыта +6[обычное]" , "зелье опыта +3[плохое]" ,"зелье улучшения лопаты +5[хорошее]"]],
-         ["медведь" , 400 , 80 , ["зелье здоровья +30xp[обычное]" ,"зелье опыта +6[обычное]" ,"граната[обычное] -40" , "граната[хорошее] -80" ,"зелье улучшения лопаты +5[хорошее]"]],
-        ["гидра" , 1000 , 150 , ["зелье здоровья[хорошее] +70xp" , "зелье улучшения лопаты +5[хорошее]" , "граната[хорошее] -80" , "2 места для фабрики[отличное]" ]]]
+
+
+
+
+
+
+vrag = [["слизень" , 50 , 5 , ["зелье здоровья +10xp[плохое]" ,"граната[плохое] -10" , "зелье опыта +3[плохое]" ,"зелье улучшения лопаты +1[плохое]"] , 50],
+         ["волк" , 150 , 20 , ["зелье здоровья +30xp[обычное]" ,"зелье опыта +6[обычное]" , "зелье опыта +3[плохое]" ,"зелье улучшения лопаты +5[хорошее]"] , 150],
+         ["медведь" , 400 , 80 , ["зелье здоровья +30xp[обычное]" ,"зелье опыта +6[обычное]" ,"граната[обычное] -40" , "граната[хорошее] -80" ,"зелье улучшения лопаты +5[хорошее]"] , 400],
+        ["гидра" , 1000 , 150 , ["зелье здоровья[хорошее] +70xp" , "зелье улучшения лопаты +5[хорошее]" , "граната[хорошее] -80" , "2 места для фабрики[отличное]" ] , 1000],
+        ["пропиздон" , 15000 , 500 , ["HYSOS[мифическое]"], 15000]]
 
 
 fabric_active = [[] ,[]]
@@ -62,7 +76,9 @@ while 1:
         elif fab == "фабрика золота 2 lvl" :
             many[xod] += 2
         elif fab == "фабрика золота 3 lvl" :
-            many[xod] += 3
+            many[xod] += 4
+        elif fab == "фабрика золота 4 lvl" :
+            many[xod] += 6
         elif fab == "фабрика опыта 1 lvl":
             lvl_point[xod] += 1
 
@@ -96,7 +112,7 @@ while 1:
     print(afects_text[afects_name[xod]])
 
 
-    if my_vrag[xod][0] != "n":
+    if my_vrag[xod] != "n":
         print()
 
         print(colors["red"] + my_vrag[xod][0]+ " нападает" + " хп : "+str(my_vrag[xod][1]))
@@ -154,10 +170,19 @@ while 1:
         if many[xod] >= 1:
             many[xod] -= 1
 
+            
+            
             if armor[not (xod)] > 0:
                 armor[not (xod)] -= atac[xod]
             else:
-                hp[not (xod)] -= atac[xod]
+                if hp[not (xod)] - atac[xod] <=0 :
+                    if random.randint(0 , 10) <= 5:
+                        hp[not (xod)] -= atac[xod]
+                    else:
+                        print(colors["red"] , "ооо повезло повезло")
+                        time.sleep(0.05)
+                else:
+                    hp[not (xod)] -= atac[xod]
         else:
             print("Нет денег")
             time.sleep(0.1)
@@ -205,7 +230,7 @@ while 1:
                 kopat[xod] += 5
                 del symka[xod][int(inp2)]
                 continue
-            elif symka[xod][int(inp2)] == "граната[обычное] -50":
+            elif symka[xod][int(inp2)] == "граната[обычное] -40":
                 if armor[not (xod)] > 0:
                     armor[not (xod)] -= 40
                 else:
@@ -233,6 +258,11 @@ while 1:
                     hp[not (xod)] -= 80
                 del symka[xod][int(inp2)]
                 continue
+            elif symka[xod][int(inp2)] == "HYSOS[мифическое]":
+                max_armor[not (xod)] = 0:
+                armor[0] = 0
+                continue
+                   
 
 
 
@@ -243,7 +273,7 @@ while 1:
 
     elif inp == "5":
 
-        cena = 50
+        cena = 100
 
         print()
         for i in range(len( fabric_active[xod])):
@@ -305,39 +335,39 @@ while 1:
 
     elif inp == "6":
         try:
-            if my_vrag[xod][0] == "n":
+            if my_vrag[xod] == "n":
                 try:
                     for i in range(len(vrag)):
                         print(str(i)+"."+vrag[i][0] + "  хп : " + str(vrag[i][1]) + "   урон : "+str(vrag[i][2]))
 
                     vibor = int(input())
-                    my_vrag[xod] = vrag[vibor]
+                    my_vrag[xod] = [vrag[vibor][0] , vrag[vibor][1] , vrag[vibor][2] , vrag[vibor][3]]
                 except Exception:
                     print("eror")
             else:
                 print()
                 print("1.атоковать ")
 
-
                 inp2 = input()
                 if inp2 == "1":
+
+                    
                     my_vrag[xod][1] -= atac[xod]
                 
                     if my_vrag[xod][1] <= 0 :
                         print("ПОБЕДА")
                         rnd = random.randint(2 , 8)
-                        
-                       
-                    
                         print("вам выпало : ")
                         print()
                         for i in range(rnd):
-
-                            predmet = my_vrag[xod][3][random.randint(0 , len(my_vrag[xod][3]))]
+                            predmet = my_vrag[xod][3][random.randint(0 , len( my_vrag[xod][3]) - 1 )]
                             print(predmet)
                             symka[xod].append(predmet)
-                        my_vrag[xod][0] = "n"
-                        vrag[xod][1] = 50
+                            
+                        my_vrag[xod] = "n"
+                        
+                        
+                        
                         input()
         except Exception:
             print("err")
@@ -357,13 +387,16 @@ while 1:
                 pred = []
                 redcost = 0
                 rnd2= random.randint(0 , 100)
-                if rnd2 < 1:
+                
+                
+                elif rnd2 < 3:
                     redcost = 3
                 elif rnd2 < 10 :
                     redcost = 2
                 elif rnd2 < 40 :
                     redcost = 1
-
+                else:
+                    redcost = 4
 
 
                 rnd2 = random.randint(0 , len(predmets[redcost]) - 1)
@@ -416,7 +449,7 @@ while 1:
         elif inp2 == "2":
             atac[xod] = int(atac[xod] * 1.6 + 1)
         elif inp2 == "3":
-            kopat[xod] = int(kopat[xod] * 1.2 + 1)
+            kopat[xod] = int(kopat[xod] * 1.3 + 2)
         elif inp2 == "4":
             if rnd_kypec[xod] > 2:
                 rnd_kypec[xod] = rnd_kypec[xod] - 4
