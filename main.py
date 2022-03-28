@@ -259,8 +259,8 @@ while 1:
                 del symka[xod][int(inp2)]
                 continue
             elif symka[xod][int(inp2)] == "HYSOS[мифическое]":
-                max_armor[not (xod)] = 0:
-                armor[0] = 0
+                max_armor[not (xod)] = 0
+                armor[not (xod)] = 0
                 continue
                    
 
@@ -389,7 +389,7 @@ while 1:
                 rnd2= random.randint(0 , 100)
                 
                 
-                elif rnd2 < 3:
+                if rnd2 < 3:
                     redcost = 3
                 elif rnd2 < 10 :
                     redcost = 2
