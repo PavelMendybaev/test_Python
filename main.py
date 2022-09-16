@@ -3,11 +3,11 @@ import time
 import random
 
 colors = {"red": "\033[31m", "black": '\033[30m', "blue": '\033[34m'}
-afects_text = {"kyrsiv": "\033[1m", "normal": "\033[0m"}
+
 
 name = ["павел", "кто то"]
 color_name = ["blue", "red"]
-afects_name = ["kyrsiv", "normal"]
+afects_name = ["\033[1m", "\033[0m"]
 
 lvlup = [3 , 3]
 lvl_point = [0 , 0]
@@ -119,20 +119,26 @@ while 1:
 
 
 
-    print(afects_text[afects_name[xod]])
+
 
 
     if my_vrag[xod] != "n":
         print()
+        
+        print(my_vrag[xod][0]+ " нападает" + " хп : "+str(my_vrag[xod][1]))
 
-        print(colors["red"] + my_vrag[xod][0]+ " нападает" + " хп : "+str(my_vrag[xod][1]))
-
-        print(colors["black"])
+   
         if armor[xod] > 0:
             armor[xod] -= my_vrag[xod][2]
         else:
             hp[xod] -= my_vrag[xod][2]
 
+
+    if xod == 0:
+        print(colors["red"])
+    else :
+        print(colors["blue"])
+    
     print("\t\t\t\tmax броня : " + str(max_armor[xod]))
     print("\t\t\t\tурон : " + str(atac[xod]))
     print("\t\t\t\tлопата : " + str(kopat[xod]))
@@ -142,8 +148,9 @@ while 1:
           "здоровье " + str(hp[1]) + "(" + str(armor[1]) + ")")
     print("               монеты     " + str(many[0]) + "\t\t\t\t\t\t\t\t\t\t\t" + "монеты  " + str(many[1]))
     print()
-    print(colors[color_name[xod]] + "                                 ходит " + name[xod] + "  lvl : " + str(
+    print("                                 ходит " + name[xod] + "  lvl : " + str(
         lvl[xod]) + "      " + str(lvl_point[xod]) + " из " + str(lvlup[xod]))
+    
     print(colors["black"])
     print()
     print("1.Атака 1\n"
